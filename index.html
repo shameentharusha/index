@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSC Marketing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            animation: fadeInBody 1s ease-in-out;
+        }
+
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header and Navigation Bar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #ffffff, #e9f1ff);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: #ffffff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+            padding: 5px 0;
+        }
+
+        body.dark-mode header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #2c3e50;
+            margin-left: 8px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode .logo {
+            color: #e0e0e0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            color: #3498db;
+        }
+
+        .logo span {
+            color: #3498db;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 35px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin-right: 15px;
+        }
+
+        nav ul li {
+            margin: 0 12px;
+            position: relative;
+        }
+
+        nav ul li a {
+            padding: 8px 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode nav ul li a {
+            color: #e0e0e0;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+            background: rgba(52, 152, 219, 0.15);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(52, 152, 219, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+            z-index: -1;
+        }
+
+        nav ul li a:hover::before {
+            width: 200%;
+            height: 200%;
+        }
+
+        /* Dark Mode Toggle in Nav */
+        .dark-mode-toggle {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .dark-mode-toggle input {
+            display: none;
+        }
+
+        .dark-mode-toggle label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 6px 12px;
+            background: #f0f6ff;
+            border-radius: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        body.dark-mode .dark-mode-toggle label {
+            background: #34495e;
+            color: #e0e0e0;
+        }
+
+        .dark-mode-toggle input:checked + label {
+            background: #3498db;
+            color: white;
+        }
+
+        .dark-mode-toggle label i {
+            margin-right: 4px;
+        }
+
+        /* Date and Time in Nav */
+        .date-time {
+            font-size: 0.85rem;
+            color: #555;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 12px;
+            border-radius: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .date-time {
+            color: #e0e0e0;
+            background: rgba(44, 62, 80, 0.9);
+        }
+
+        /* Mobile Navigation */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .nav-toggle div {
+            width: 22px;
+            height: 2px;
+            background: #333;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+        body.dark-mode .nav-toggle div {
+            background: #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                display: none;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            }
+
+            body.dark-mode nav {
+                background: #2c3e50;
+            }
+
+            nav.active {
+                display: flex;
+                animation: slideIn 0.3s ease forwards;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                margin: 0;
+            }
+
+            nav ul li {
+                margin: 12px 0;
+            }
+
+            .dark-mode-toggle {
+                margin: 12px 0;
+            }
+
+            .date-time {
+                margin: 12px 0;
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cursor Glow */
+        .cursor-glow {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.3), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease, opacity 0.2s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Hero Section with Slideshow */
+        .hero {
+            position: relative;
+            padding: 120px 0 50px;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            min-height: 60vh;
+            flex: 1 0 auto;
+            background: linear-gradient(135deg, rgba(0, 0, 128, 0.6), rgba(52, 152, 219, 0.5));
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding-bottom: 20px;
+        }
+
+        .hero-image-slideshow {
+            position: relative;
+            margin-top: 20px;
+            z-index: 2;
+        }
+
+        .hero-image-slide {
+            display: none;
+            max-width: 80%;
+            height: auto;
+            max-height: 200px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image-slide.active {
+            display: block;
+        }
+
+        .hero-image-slide:hover {
+            transform: scale(1.05);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        /* CTA Button (Send Message via Email) */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+
+        .cta-button i {
+            margin-right: 8px;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            width: 300%;
+            height: 300%;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.7), 0 0 25px rgba(255, 142, 83, 0.5);
+        }
+
+        .cta-button:hover i {
+            transform: rotate(360deg);
+        }
+
+        body.dark-mode .cta-button {
+            background: linear-gradient(135deg, #e74c3c, #e67e22);
+        }
+
+        body.dark-mode .cta-button:hover {
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.7), 0 0 25px rgba(230, 126, 34, 0.5);
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #25D366, #20BF55);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+
+        .whatsapp-button i {
+            margin-right: 6px;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .whatsapp-button:hover::before {
+            width: 300%;
+            height: 300%;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.7), 0 0 25px rgba(32, 191, 85, 0.5);
+        }
+
+        .whatsapp-button:hover i {
+            transform: rotate(360deg);
+        }
+
+        body.dark-mode .whatsapp-button {
+            background: linear-gradient(135deg, #20BF55, #1AA846);
+        }
+
+        body.dark-mode .whatsapp-button:hover {
+            box-shadow: 0 0 15px rgba(32, 191, 85, 0.7), 0 0 25px rgba(26, 168, 70, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Intro Section */
+        .intro {
+            padding: 60px 0;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .intro {
+            background: #2c3e50;
+        }
+
+        .intro p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1rem;
+            color: #555;
+            animation: fadeIn 1.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        body.dark-mode .intro p {
+            color: #b0b0b0;
+        }
+
+        .intro::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1), transparent);
+            animation: pulse 10s infinite ease-in-out;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.3; }
+            50% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(0.8); opacity: 0.3; }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+        }
+
+        body.dark-mode .services {
+            background: linear-gradient(to bottom, #1a1a1a, #2c3e50);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            position: relative;
+            animation: slideInUp 1s ease;
+        }
+
+        body.dark-mode .services h2 {
+            color: #e0e0e0;
+        }
+
+        .services h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 50px;
+            height: 3px;
+            background: #3498db;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .services h2:hover::after {
+            width: 100px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .service-card {
+            background: #34495e;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(52, 152, 219, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+            top: -20%;
+            left: -20%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 2.2rem;
+            color: #3498db;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            color: #ff6b6b;
+        }
+
+        /* About Section */
+        .about {
+            padding: 60px 0;
+            background: #ffffff;
+            position: relative;
+        }
+
+        body.dark-mode .about {
+            background: #2c3e50;
+        }
+
+        .about-content h2 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            animation: slideInUp 1s ease;
+        }
+
+        body.dark-mode .about-content h2 {
+            color: #e0e0e0;
+        }
+
+        .about-content ul li {
+            margin: 8px 0;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .about-content ul li i {
+            margin-right: 10px;
+            color: #3498db;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        body.dark-mode .about-content ul li {
+            color: #b0b0b0;
+        }
+
+        .about-content ul li:hover {
+            transform: translateX(8px);
+        }
+
+        .about-content ul li:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Video before Our Values */
+        .values-video {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .values-video video {
+            width: 280px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .values-video video:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Insights Section */
+        .insights {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+        }
+
+        body.dark-mode .insights {
+            background: linear-gradient(to bottom, #2c3e50, #1a1a1a);
+        }
+
+        .insights h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            animation: slideInUp 1s ease;
+        }
+
+        body.dark-mode .insights h2 {
+            color: #e0e0e0;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .insight-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        body.dark-mode .insight-card {
+            background: #34495e;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .insight-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .insight-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .insight-content {
+            padding: 15px;
+            position: relative;
+        }
+
+        .insight-content a {
+            color: #3498db;
+            transition: color 0.3s ease;
+        }
+
+        .insight-content a:hover {
+            color: #ff6b6b;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f5f5f5, #e9ecef);
+            position: relative;
+        }
+
+        body.dark-mode .contact {
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            animation: slideInUp 1s ease;
+        }
+
+        body.dark-mode .contact h2 {
+            color: #e0e0e0;
+        }
+
+        .contact-form {
+            max-width: 550px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .contact-form {
+            background: #34495e;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #2c3e50;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .form-group label {
+            color: #e0e0e0;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background: #2c3e50;
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5), 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            text-align: justify;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info p i {
+            margin-right: 15px;
+            color: #3498db;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-info p:hover i {
+            transform: scale(1.2);
+        }
+
+        body.dark-mode .contact-info p {
+            color: #b0b0b0;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-top: 3px solid #3498db;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            animation: fadeIn 1s ease;
+        }
+
+        .footer-logo span {
+            color: #3498db;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #3498db;
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        footer p {
+            margin-top: 15px;
+            font-size: 1rem;
+            animation: fadeIn 1s ease 0.5s forwards;
+            opacity: 0;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1), transparent);
+            animation: pulse 12s infinite ease-in-out;
+            z-index: 0;
+        }
+
+        footer > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 50vh;
+                padding: 80px 0 30px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-image-slide {
+                max-height: 150px;
+            }
+
+            .values-video video {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .footer-logo {
+                font-size: 1.2rem;
+            }
+
+            .social-icons a {
+                font-size: 1.3rem;
+                margin: 0 10px;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+            }
+
+            .contact-info {
+                text-align: left;
+            }
+        }
+
+        /* Fade Section Animation */
+        .fade-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo-container">
+                <img src="C:\Users\User\OneDrive\Desktop\Background img\magazines\vcs_u-removebg-preview.png" class="logo-img" alt="VSC Logo">
+                <div class="logo">VSC<span>.</span></div>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#insights">Insights</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="dark-mode-toggle">
+                    <input type="checkbox" id="darkModeToggle">
+                    <label for="darkModeToggle"><i class="fas fa-moon"></i> Dark</label>
+                </div>
+                <div class="date-time" id="dateTime"></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Slideshow and Image Slideshow -->
+    <section class="hero fade-section" id="hero">
+        <div class="container hero-content">
+            <h1>Driving Growth Through Strategic Marketing</h1>
+            <p>We help businesses build powerful brands, reach their audience, and achieve measurable results</p>
+            <a href="#services" class="cta-button">Explore Our Services</a>
+            <!-- Image Slideshow -->
+            <div class="hero-image-slideshow">
+                <img src="C:\Users\User\OneDrive\Desktop\Background img\magazines\360_F_850958966_QYQKqF5i06YLxE4838BBOOTNc3bemcuV.jpg" alt="Marketing Example 1" class="hero-image-slide" onerror="this.src='https://via.placeholder.com/800x400';">
+                <img src="C:\Users\User\OneDrive\Desktop\Background img\magazines\internet-business-technology-network-concept-600nw-2476823445.webp" alt="Marketing Example 2" class="hero-image-slide" onerror="this.src='https://via.placeholder.com/800x400';">
+                <img src="C:\Users\User\OneDrive\Desktop\Background img\magazines\fc9e33a18cb6f1940ab28ef959245dbe.jpeg" alt="Marketing Example 3" class="hero-image-slide" onerror="this.src='https://via.placeholder.com/800x400';">
+<img src="C:\Users\User\OneDrive\Desktop\Background img\magazines\diverse-team-professionals-engaged-website-600nw-2395688841.webp" alt="Marketing Example 3" class="hero-image-slide" onerror="this.src='https://via.placeholder.com/800x400';">
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro fade-section">
+        <div class="container">
+            <p>At VSC, we specialize in crafting data-driven marketing strategies that deliver results. From social media growth to SEO optimization, we help businesses connect with their audience and achieve sustainable growth.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services fade-section" id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Social Media Strategy</h3>
+                    <p>Crafting tailored social media plans to grow your audience and engagement</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-envelope"></i></div>
+                    <h3>Email Marketing</h3>
+                    <p>Designing effective email campaigns to nurture leads and drive conversions</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-search"></i></div>
+                    <h3>SEO Optimization</h3>
+                    <p>Improving your website’s visibility and ranking on search engines</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Paid Advertising</h3>
+                    <p>Maximizing ROI through targeted Facebook/Google Ads campaigns</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-palette"></i></div>
+                    <h3>Brand Development</h3>
+                    <p>Building a powerful brand that resonates with your audience</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Marketing Analytics</h3>
+                    <p>Measuring and optimizing your marketing efforts with data-driven insights</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about fade-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>About VSC</h2>
+                <p><strong>Mission:</strong> Our mission is to empower businesses with innovative marketing strategies that drive growth and build lasting connections.</p>
+                <p>VSC, based in Sri Lanka, is a team of marketing strategists, brand experts, and data analysts dedicated to helping businesses thrive in a competitive landscape. We combine creativity with analytics to deliver impactful results.</p>
+                <div class="values-video">
+                    <video controls>
+                        <source src="C:\Users\User\OneDrive\Desktop\sample-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h3>Our Values</h3>
+                <ul>
+                    <li><i class="fas fa-lightbulb"></i> Creativity: Innovative solutions tailored to your needs</li>
+                    <li><i class="fas fa-chart-pie"></i> Data-Driven: Strategies backed by analytics and insights</li>
+                    <li><i class="fas fa-handshake"></i> Collaboration: Working closely with clients to achieve their goals</li>
+                    <li><i class="fas fa-bullseye"></i> Results-Oriented: Focused on delivering measurable outcomes</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section class="insights fade-section" id="insights">
+        <div class="container">
+            <h2>Insights</h2>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <img src="C:\Users\User\OneDrive\Desktop\Background img\magazines\stock_market_width_1200_format_jpeg_6fc99de1c3.jpg" alt="Blog 1" onerror="this.src='https://via.placeholder.com/800x400';">
+                    <div class="insight-content">
+                        <h3>5 Marketing Trends to Watch in 2024</h3>
+                        <p>Discover the latest trends shaping the future of digital marketing and brand strategies...</p>
+                        <a href="#">Read More</a>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <img src="C:\Users\User\OneDrive\Desktop\Background img\magazines\1669727345932.jpeg" alt="Blog 2" onerror="this.src='https://via.placeholder.com/800x400';">
+                    <div class="insight-content">
+                        <h3>Building a Standout Brand</h3>
+                        <p>Learn how to create a unique brand identity that resonates with your target audience...</p>
+                        <a href="#">Read More</a>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <img src="C:\Users\User\OneDrive\Desktop\Background img\magazines\shutterstock_2341272643.jpg" alt="Blog 3" onerror="this.src='https://via.placeholder.com/800x400';">
+                    <div class="insight-content">
+                        <h3>Data-Driven Marketing</h3>
+                        <p>Explore how data analytics is revolutionizing modern marketing strategies...</p>
+                        <a href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact fade-section" id="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-form">
+                <form action="mailto:dilshaniireshamunasingha@gmail.com" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button"><i class="fas fa-envelope"></i><span>Send Message via Email</span></button>
+                </form>
+                <br>
+                <a href="https://wa.me/+94703626687" class="whatsapp-button" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> Email: dilshaniireshamunasinghaarachchi@gmail.com</p>
+                <p><i class="fas fa-phone"></i> Phone: +94 766 158 341</p>
+                <p><i class="fas fa-map-marker-alt"></i> Address: Walahanduwa, Galle, Sri Lanka</p><br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31723.51803430329!2d80.35052533955078!3d6.032752999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae173bb6b4e170d%3A0x304d37e0a1e2a90a!2sWalahanduwa%2C%20Galle!5e0!3m2!1sen!2slk!4v1688552174524!5m2!1sen!2slk" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="https://wa.me/94703626687" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2024 VSC Marketing. All rights reserved.<br>
+            Created By:- TN Academy IT Department
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const navToggle = document.getElementById('navToggle');
+        const nav = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+
+        // Load Dark Mode Preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.checked = true;
+        }
+
+        // Cursor Glow Effect
+        const cursorGlow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = `${e.pageX}px`;
+            cursorGlow.style.top = `${e.pageY}px`;
+        });
+
+        // Function to update the date and time
+        function updateDateTime() {
+            const dateTimeElement = document.getElementById('dateTime');
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString();
+            const formattedTime = now.toLocaleTimeString();
+            dateTimeElement.textContent = `${formattedDate} ${formattedTime}`;
+        }
+
+        // Update the date and time every second
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                }
+            });
+        });
+
+        // Fade in sections on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('fade-section');
+            observer.observe(section);
+        });
+
+        // Hero Background Slideshow
+        const bgSlides = document.querySelectorAll('.hero-slide');
+        let currentBgSlide = 0;
+
+        function showBgSlide(index) {
+            bgSlides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextBgSlide() {
+            currentBgSlide = (currentBgSlide + 1) % bgSlides.length;
+            showBgSlide(currentBgSlide);
+        }
+
+        function prevBgSlide() {
+            currentBgSlide = (currentBgSlide - 1 + bgSlides.length) % bgSlides.length;
+            showBgSlide(currentBgSlide);
+        }
+
+        // Initial background slide
+        showBgSlide(currentBgSlide);
+
+        // Change background slide every 5 seconds
+        setInterval(nextBgSlide, 5000);
+
+        // Hero Image Slideshow
+        const imageSlides = document.querySelectorAll('.hero-image-slide');
+        let currentImageSlide = 0;
+
+        function showImageSlide(index) {
+            imageSlides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextImageSlide() {
+            currentImageSlide = (currentImageSlide + 1) % imageSlides.length;
+            showImageSlide(currentImageSlide);
+        }
+
+        function prevImageSlide() {
+            currentImageSlide = (currentImageSlide - 1 + imageSlides.length) % imageSlides.length;
+            showImageSlide(currentImageSlide);
+        }
+
+        // Initial image slide
+        showImageSlide(currentImageSlide);
+
+        // Change image slide every 5 seconds
+        setInterval(nextImageSlide, 5000);
+
+        // Manual controls for both slideshows (e.g., arrow keys)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextBgSlide();
+                nextImageSlide();
+            }
+            if (e.key === 'ArrowLeft') {
+                prevBgSlide();
+                prevImageSlide();
+            }
+        });
+    </script>
+</body>
+</html>
