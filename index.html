@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VSC Marketing</title>
+    <title>Dilvision Marketing</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -121,32 +121,32 @@
         nav {
             display: flex;
             align-items: center;
-            flex-wrap: nowrap; /* Prevent wrapping */
+            flex-wrap: nowrap;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            margin-right: 10px; /* Reduced margin */
+            margin-right: 10px;
             padding: 0;
-            flex-wrap: nowrap; /* Ensure single line */
+            flex-wrap: nowrap;
         }
 
         nav ul li {
-            margin: 0 8px; /* Reduced margin from 12px to 8px */
+            margin: 0 8px;
             position: relative;
         }
 
         nav ul li a {
-            padding: 6px 10px; /* Reduced padding from 8px 12px to 6px 10px */
+            padding: 6px 10px;
             font-weight: 500;
-            font-size: 0.9rem; /* Reduced font size from 0.95rem to 0.9rem */
+            font-size: 0.9rem;
             color: #e0e0e0;
             transition: all 0.3s ease;
             border-radius: 20px;
             position: relative;
             overflow: hidden;
-            white-space: nowrap; /* Prevent text wrapping */
+            white-space: nowrap;
         }
 
         body.light-mode nav ul li a {
@@ -183,7 +183,7 @@
         .dark-mode-toggle {
             display: flex;
             align-items: center;
-            margin-right: 10px; /* Reduced margin from 15px to 10px */
+            margin-right: 10px;
         }
 
         .dark-mode-toggle input {
@@ -194,12 +194,12 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-            padding: 4px 8px; /* Reduced padding from 6px 12px to 4px 8px */
+            padding: 4px 8px;
             background: #34495e;
             border-radius: 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            font-size: 0.8rem; /* Reduced font size from 0.85rem to 0.8rem */
+            font-size: 0.8rem;
         }
 
         body.light-mode .dark-mode-toggle label {
@@ -218,14 +218,14 @@
 
         /* Date and Time in Nav */
         .date-time {
-            font-size: 0.8rem; /* Reduced font size from 0.85rem to 0.8rem */
+            font-size: 0.8rem;
             color: #c0c0c0;
             background: rgba(255, 255, 255, 0.1);
-            padding: 4px 8px; /* Reduced padding from 6px 12px to 4px 8px */
+            padding: 4px 8px;
             border-radius: 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            white-space: nowrap; /* Prevent wrapping */
+            white-space: nowrap;
         }
 
         body.light-mode .date-time {
@@ -238,6 +238,9 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
         }
 
         .nav-toggle div {
@@ -285,15 +288,15 @@
             }
 
             nav ul li {
-                margin: 10px 0; /* Adjusted for mobile */
+                margin: 10px 0;
             }
 
             .dark-mode-toggle {
-                margin: 10px 0; /* Adjusted for mobile */
+                margin: 10px 0;
             }
 
             .date-time {
-                margin: 10px 0; /* Adjusted for mobile */
+                margin: 10px 0;
             }
         }
 
@@ -385,17 +388,18 @@
             align-items: center;
             background: linear-gradient(135deg, #ff6b6b, #ff8e53);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1rem;
             animation: fadeInUp 1s ease 0.6s forwards;
             opacity: 0;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
             z-index: 1;
             border: none;
+            cursor: pointer;
+            transition: box-shadow 0.4s ease, transform 0.4s ease;
         }
 
         .cta-button i {
@@ -428,13 +432,23 @@
             height: 300%;
         }
 
-        .cta-button:hover {
+        .cta-button:hover:not(.no-hover) {
             transform: scale(1.1);
             box-shadow: 0 0 15px rgba(255, 107, 107, 0.7), 0 0 25px rgba(255, 142, 83, 0.5);
         }
 
         .cta-button:hover i {
             transform: rotate(360deg);
+        }
+
+        /* Force reset transform when not hovering */
+        .cta-button:not(:hover) {
+            transform: scale(1) !important;
+            transition: transform 0.2s ease;
+        }
+
+        .cta-button.no-hover {
+            transform: scale(1) !important;
         }
 
         .ripple {
@@ -459,10 +473,10 @@
             align-items: center;
             background: linear-gradient(135deg, #25D366, #20BF55);
             color: white;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-weight: 500;
-            font-size: 0.9rem;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
             text-decoration: none;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             position: relative;
@@ -470,10 +484,17 @@
             transition: all 0.4s ease;
             z-index: 1;
             border: none;
+            cursor: pointer;
+            margin-top: 10px; /* Ensure spacing between buttons */
+        }
+
+        body.light-mode .whatsapp-button {
+            background: linear-gradient(135deg, #25D366, #20BF55);
+            color: white;
         }
 
         .whatsapp-button i {
-            margin-right: 6px;
+            margin-right: 8px;
             font-size: 1rem;
             transition: transform 0.3s ease;
         }
@@ -503,6 +524,66 @@
         }
 
         .whatsapp-button:hover i {
+            transform: rotate(360deg);
+        }
+
+        /* Email Button */
+        .email-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px; /* Ensure spacing between buttons */
+        }
+
+        body.light-mode .email-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .email-button i {
+            margin-right: 8px;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .email-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .email-button:hover::before {
+            width: 300%;
+            height: 300%;
+        }
+
+        .email-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.7), 0 0 25px rgba(41, 128, 185, 0.5);
+        }
+
+        .email-button:hover i {
             transform: rotate(360deg);
         }
 
@@ -819,7 +900,7 @@
             background: linear-gradient(135deg, #34495e, #2c3e50);
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -833,7 +914,7 @@
 
         .package-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
         .package-card::before {
@@ -1343,8 +1424,8 @@
     <header>
         <div class="container nav-container">
             <div class="logo-container">
-                <img src="eye.png" class="logo-img" alt="VSC Logo">
-                <div class="logo">VSC<span>.</span></div>
+                <img src="eye.png" class="logo-img" alt="Dilvision Marketing Logo">
+                <div class="logo">Dilvision Marketing<span>.</span></div>
             </div>
             <div class="nav-toggle" id="navToggle">
                 <div></div>
@@ -1375,6 +1456,7 @@
     <section class="hero fade-section" id="hero">
         <div class="container hero-content">
             <h1>Driving Growth Through Strategic Marketing</h1>
+            <p>Transforming Vision into Action</p>
             <p>We help businesses build powerful brands, reach their audience, and achieve measurable results</p>
             <a href="#services" class="cta-button">Explore Our Services</a>
             <div class="hero-image-slideshow">
@@ -1391,7 +1473,9 @@
     <!-- Intro Section -->
     <section class="intro fade-section">
         <div class="container">
-            <p>At VSC, we specialize in crafting data-driven marketing strategies that deliver results. From social media growth to SEO optimization, we help businesses connect with their audience and achieve sustainable growth.</p>
+            <div>
+                <p>At Dilvision Marketing, we specialize in crafting data-driven marketing strategies that deliver results. From social media growth to SEO optimization, we help businesses connect with their audience and achieve sustainable growth.</p>
+            </div>
         </div>
     </section>
 
@@ -1399,12 +1483,12 @@
     <section class="about fade-section" id="about">
         <div class="container">
             <div class="about-content">
-                <h2>About VSC</h2>
-                <p><strong>Mission:</strong> Our mission is to empower businesses with innovative marketing strategies that drive growth and build lasting connections.</p>
-                <p>VSC, based in Sri Lanka, is a team of marketing strategists, brand experts, and data analysts dedicated to helping businesses thrive in a competitive landscape. We combine creativity with analytics to deliver impactful results.</p>
+                <h2>About Dilvision Marketing</h2>
+                <p><strong>Mission:</strong> Our mission at Dilvision Marketing is to empower businesses with innovative marketing strategies that drive growth and build lasting connections.</p>
+                <p>Dilvision Marketing, based in Sri Lanka, is a team of marketing strategists, brand experts, and data analysts dedicated to helping businesses thrive in a competitive landscape. We combine creativity with analytics to deliver impactful results.</p>
                 <div class="values-video">
                     <video controls>
-                        <source src="Blue Navy and Green Creative Mastering Digital Marketing Video.mp4" type="video/mp4">
+                        <source src="C:\Users\User\OneDrive\Desktop\sample-video.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -1465,14 +1549,14 @@
             <div class="package-grid">
                 <div class="package-card">
                     <h3><i class="fas fa-star"></i> Starter Package</h3>
-                    <p><strong>Price:</strong> <span id="starter-price">LKR 90,000/month</span></p>
+                    <p><strong>Price:</strong> <span id="starter-price">LKR 90,000/month</span></p><br>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> Social Media Management: 2 platforms, 8 posts/month</li>
                         <li><i class="fas fa-check-circle"></i> Monthly Performance Report</li>
                         <li><i class="fas fa-check-circle"></i> Email Marketing: 1 campaign/month</li>
-                        <li><i class="fas fa-check-circle"></i> Basic SEO Audit</li>
+                        <li><i class="fas fa-check-circle"></i> Basic SEO Audit</li><br>
                     </ul>
-                    <p><strong>Add-Ons:</strong></p>
+                    <p><strong>Add-Ons:</strong></p><br>
                     <ul>
                         <li><i class="fas fa-plus-circle"></i> Additional social media platform: <span id="additional-platform">LKR 17,500/month</span></li>
                         <li><i class="fas fa-plus-circle"></i> Extra email campaign: <span id="extra-email">LKR 10,500/campaign</span></li>
@@ -1480,15 +1564,15 @@
                 </div>
                 <div class="package-card">
                     <h3><i class="fas fa-rocket"></i> Growth Package</h3>
-                    <p><strong>Price:</strong> <span id="growth-price">LKR 210,000/month</span></p>
+                    <p><strong>Price:</strong> <span id="growth-price">LKR 210,000/month</span></p><br>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> Social Media Management: 3 platforms, 12 posts/month</li>
                         <li><i class="fas fa-check-circle"></i> Paid Ad Management: 1 ad campaign</li>
                         <li><i class="fas fa-check-circle"></i> Email Marketing: 2 campaigns/month</li>
                         <li><i class="fas fa-check-circle"></i> SEO Optimization</li>
-                        <li><i class="fas fa-check-circle"></i> Monthly Performance Report</li>
+                        <li><i class="fas fa-check-circle"></i> Monthly Performance Report</li><br>
                     </ul>
-                    <p><strong>Add-Ons:</strong></p>
+                    <p><strong>Add-Ons:</strong></p><br>
                     <ul>
                         <li><i class="fas fa-plus-circle"></i> Additional ad campaign: <span id="additional-ad">LKR 35,000/month</span></li>
                         <li><i class="fas fa-plus-circle"></i> Content strategy consultation: <span id="content-strategy">LKR 52,500/session</span></li>
@@ -1496,7 +1580,7 @@
                 </div>
                 <div class="package-card">
                     <h3><i class="fas fa-crown"></i> Premium Package</h3>
-                    <p><strong>Price:</strong> <span id="premium-price">LKR 450,000/month</span></p>
+                    <p><strong>Price:</strong> <span id="premium-price">LKR 450,000/month</span></p><br>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> Social Media Management: 4 platforms, 16 posts/month</li>
                         <li><i class="fas fa-check-circle"></i> Paid Ad Management: 2 ad campaigns</li>
@@ -1504,9 +1588,9 @@
                         <li><i class="fas fa-check-circle"></i> Comprehensive SEO Strategy</li>
                         <li><i class="fas fa-check-circle"></i> Customized Content Strategy</li>
                         <li><i class="fas fa-check-circle"></i> Monthly Performance Report</li>
-                        <li><i class="fas fa-check-circle"></i> Dedicated Account Manager</li>
+                        <li><i class="fas fa-check-circle"></i> Dedicated Account Manager</li><br>
                     </ul>
-                    <p><strong>Add-Ons:</strong></p>
+                    <p><strong>Add-Ons:</strong></p><br>
                     <ul>
                         <li><i class="fas fa-plus-circle"></i> Influencer marketing campaign: <span id="influencer-marketing">LKR 105,000/campaign</span></li>
                         <li><i class="fas fa-plus-circle"></i> Website optimization: <span id="website-optimization">LKR 70,000/month</span></li>
@@ -1514,7 +1598,7 @@
                 </div>
                 <div class="package-card">
                     <h3><i class="fas fa-cogs"></i> Custom Package</h3>
-                    <p><strong>Price:</strong> Custom Quote</p>
+                    <p><strong>Price:</strong> Custom Quote</p><br>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> Tailored mix of services</li>
                         <li><i class="fas fa-check-circle"></i> Customized strategy based on client goals</li>
@@ -1579,19 +1663,19 @@
     <!-- Careers Section -->
     <section class="careers fade-section" id="careers">
         <div class="container">
-            <h2>Careers at VSC</h2>
+            <h2>Careers at Dilvision Marketing</h2>
             <div class="career-card">
-                <h3>Digital Marketing Executive</h3>
+                <h3>Digital Marketing Officer</h3>
                 <ul>
                     <li><i class="fas fa-briefcase"></i> <strong>Position:</strong> Full-Time</li>
                     <li><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Galle, Sri Lanka</li>
                     <li><i class="fas fa-money-bill-wave"></i> <strong>Salary:</strong> LKR 60,000 - 80,000/month</li>
-                    <li><i class="fas fa-graduation-cap"></i> <strong>Qualifications:</strong></li>
+                    <li><i class="fas fa-graduation-cap"></i> <strong>Qualifications:</strong></li><br>
                     <li><i class="fas fa-check-circle"></i> Bachelor’s degree in Marketing, Communications, or related field</li>
                     <li><i class="fas fa-check-circle"></i> 2+ years of experience in digital marketing</li>
                     <li><i class="fas fa-check-circle"></i> Proficiency in SEO, SEM, and social media platforms</li>
                     <li><i class="fas fa-check-circle"></i> Strong analytical and communication skills</li><br>
-                    <li><i class="fas fa-envelope"></i> <strong>Apply:</strong> Send your CV to <a href="mailto:shameentharusha@gmail.com">careers@vscmarketing.com</a></li>
+                    <li><i class="fas fa-envelope"></i> <strong>Apply:</strong> Send your CV to <a href="mailto:ilshaniireshamunasingha@gmail.com">dilshaniireshamunasingha@gmail.com</a></li>
                 </ul>
             </div>
         </div>
@@ -1615,15 +1699,15 @@
                         <label>Message</label>
                         <textarea name="message" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="cta-button"><i class="fas fa-envelope"></i><span>Send Message via Email</span></button>
+                    <button type="submit" class="email-button"><i class="fas fa-envelope"></i> Send Message via Email</button>
                 </form>
                 <br>
-                <a href="https://wa.me/+94703626687" class="whatsapp-button" target="_blank">
+                <a href="https://wa.me/+94766158341" class="whatsapp-button" target="_blank">
                     <i class="fab fa-whatsapp"></i> Chat on WhatsApp
                 </a>
             </div>
             <div class="contact-info">
-                <p><i class="fas fa-envelope"></i> Email: dilshaniireshamunasinghaarachchi@gmail.com</p>
+                <p><i class="fas fa-envelope"></i> Email: dilshaniireshamunasingha@gmail.com</p>
                 <p><i class="fas fa-phone"></i> Phone: +94 766 158 341</p>
                 <p><i class="fas fa-map-marker-alt"></i> Address: Walahanduwa, Galle, Sri Lanka</p><br>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31723.51803430329!2d80.35052533955078!3d6.032752999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae173bb6b4e170d%3A0x304d37e0a1e2a90a!2sWalahanduwa%2C%20Galle!5e0!3m2!1sen!2slk!4v1688552174524!5m2!1sen!2slk" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -1638,12 +1722,13 @@
                 <a href="#"><i class="fab fa-facebook"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="https://wa.me/94703626687" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/94766158341" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
         <div class="copyright">
-            © 2025 VSC Marketing. All rights reserved.<br>
+            © 2025 Dilvision Marketing. All rights reserved.<br>
             Created By:- Tharusha Nanayakkara
+            Contact: +94 703626687
         </div>
     </footer>
 
@@ -1750,8 +1835,47 @@
         // Change image slide every 5 seconds
         setInterval(nextImageSlide, 5000);
 
-        // Ripple effect for buttons
-        document.querySelectorAll('.cta-button, .whatsapp-button').forEach(button => {
+        // Ripple effect and scale handling for CTA buttons
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const rect = button.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+                ripple.style.left = e.clientX - rect.left - ripple.offsetWidth / 2 + 'px';
+                ripple.style.top = e.clientY - rect.top - ripple.offsetHeight / 2 + 'px';
+                button.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+
+                button.classList.add('no-hover');
+                setTimeout(() => {
+                    button.classList.remove('no-hover');
+                }, 500);
+            });
+        });
+
+        // Ripple effect for WhatsApp buttons
+        document.querySelectorAll('.whatsapp-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const rect = button.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+                ripple.style.left = e.clientX - rect.left - ripple.offsetWidth / 2 + 'px';
+                ripple.style.top = e.clientY - rect.top - ripple.offsetHeight / 2 + 'px';
+                button.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Ripple effect for Email buttons
+        document.querySelectorAll('.email-button').forEach(button => {
             button.addEventListener('click', function(e) {
                 const rect = button.getBoundingClientRect();
                 const ripple = document.createElement('span');
@@ -1843,3 +1967,4 @@
     </script>
 </body>
 </html>
+
