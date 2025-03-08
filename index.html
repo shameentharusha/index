@@ -1949,7 +1949,7 @@
                 const data = await response.json();
                 const rate = data.rates.LKR;
 
-                document.getElementById('starter-price').textContent = `LKR ${(136 / rate).toFixed(2)}/month`;
+                document.getElementById('starter-price').textContent = `LKR ${(120 * rate).toFixed(2)}/month`;
                 document.getElementById('growth-price').textContent = `LKR ${(102 * rate).toFixed(2)}/month`;
                 document.getElementById('premium-price').textContent = `LKR ${(96 * rate).toFixed(2)}/month`;
                 document.getElementById('additional-platform').textContent = `LKR ${(20 * rate).toFixed(2)}/month`;
